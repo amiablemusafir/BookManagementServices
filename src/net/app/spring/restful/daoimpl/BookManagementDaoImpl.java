@@ -44,7 +44,25 @@ public class BookManagementDaoImpl implements IBookManagementDao {
 		String query = "from BookDetailDto as bookDetailDto where bookDetailDto.bnum_isactive = 1";
 		bookList = sessionFactory.getCurrentSession().find(query);
 		return bookList;
-	}	
+	}
+	
+	@Override
+	public List<BookDetailDto> getBookDetailsDtoFilter(String filter) throws Exception {
+		
+		List<BookDetailDto> bookList = null;		
+		String query = "from BookDetailDto as bookDetailDto where bookDetailDto.bnum_isactive = 1";
+		if(filter.equals("author")) {
+			query = query+" ORDER BY bookDetailDto.bstr_author ASC";
+		} else if(filter.equals("date")) {
+			query = query+" ORDER BY bookDetailDto.bdt_entry_date ASC";
+		} else if(filter.equals("price")) {
+			query = query+" ORDER BY bookDetailDto.bstr_price ASC";
+		} else if(filter.equals("name")) {
+			query = query+" ORDER BY bookDetailDto.bstr_bookname ASC";
+		}		
+		bookList = sessionFactory.getCurrentSession().find(query);
+		return bookList;
+	}
 	
 	@Override
 	public BookDetailDto findBookDetailDtoById(Integer id) throws Exception {

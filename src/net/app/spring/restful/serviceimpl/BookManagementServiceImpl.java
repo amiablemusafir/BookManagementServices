@@ -25,6 +25,10 @@ public class BookManagementServiceImpl implements IBookManagementService {
 		return this.bookManagementDao.getBookDetailsDto();
 	}
 	
+	public List<BookDetailDto> getBookDetailsDtoFilter(String filter) throws Exception {
+		return this.bookManagementDao.getBookDetailsDtoFilter(filter);
+	}
+	
 	public BookDetailDto findBookDetailDtoById(Integer id) throws Exception {
 		return this.bookManagementDao.findBookDetailDtoById(id);
 	}

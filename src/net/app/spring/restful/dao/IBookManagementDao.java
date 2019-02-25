@@ -7,6 +7,9 @@ import net.app.spring.restful.model.BookDetailDto;
 public interface IBookManagementDao {
 
 	public List<BookDetailDto> getBookDetailsDto() throws Exception;
+	
+	public List<BookDetailDto> getBookDetailsDtoFilter(String filter) throws Exception;
+	
 	public BookDetailDto findBookDetailDtoById(Integer id) throws Exception;
 	
 	public void updateBookDetailDto(BookDetailDto bookDetailDto) throws Exception;

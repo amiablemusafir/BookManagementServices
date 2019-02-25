@@ -14,7 +14,7 @@ public class BookDetailDto implements Serializable {
 	@Column(name = "bnum_book_id") public Integer bnum_book_id;
 	@Column(name = "bstr_bookname") public String bstr_bookname;
 	@Column(name = "bstr_author") public String bstr_author;
-	@Column(name = "bstr_price") public String bstr_price;
+	@Column(name = "bstr_price") public Float bstr_price;
 	@Column(name = "bdt_entry_date") public Date bdt_entry_date;
 	@Column(name = "bnum_isactive") public Integer bnum_isactive;
 	
@@ -36,10 +36,10 @@ public class BookDetailDto implements Serializable {
 	public void setBstr_author(String bstr_author) {
 		this.bstr_author = bstr_author;
 	}
-	public String getBstr_price() {
+	public Float getBstr_price() {
 		return bstr_price;
 	}
-	public void setBstr_price(String bstr_price) {
+	public void setBstr_price(Float bstr_price) {
 		this.bstr_price = bstr_price;
 	}
 	public Date getBdt_entry_date() {

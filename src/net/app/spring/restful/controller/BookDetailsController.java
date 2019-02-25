@@ -28,7 +28,7 @@ public class BookDetailsController {
 	private IBookManagementService bookManagementService; 
 	
     @RequestMapping(value = EmpRestURIConstants.GET_ALL_BOOKDETAILS, method = RequestMethod.GET)
-    public @ResponseBody List<BookDetailDto> getProductMethod1(@RequestParam(value="itemcode", defaultValue="1") String itemcode) {
+    public @ResponseBody List<BookDetailDto> getBooks(@RequestParam(value="bookcode", defaultValue="1") String bookcode) {
     	
     	List<BookDetailDto> bookDetailDtoList = new ArrayList<BookDetailDto>();
     	try {
@@ -39,6 +39,17 @@ public class BookDetailsController {
 		return  bookDetailDtoList;
     }
     
+    @RequestMapping(value = EmpRestURIConstants.GET_ALL_BOOKDETAILS_FILTER, method = RequestMethod.GET)
+    public @ResponseBody List<BookDetailDto> getBooksByFilter(@PathVariable(value="filter") String filter) {
+    	
+    	List<BookDetailDto> bookDetailDtoList = new ArrayList<BookDetailDto>();
+    	try {
+    		bookDetailDtoList = this.bookManagementService.getBookDetailsDtoFilter(filter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return  bookDetailDtoList;
+    }
     
     @RequestMapping(value = EmpRestURIConstants.GET_BOOK, method = RequestMethod.GET)
     public @ResponseBody BookDetailDto getBookDetailsById(@PathVariable(value="bookcode")  String bookcode) {
@@ -54,7 +65,7 @@ public class BookDetailsController {
     }
   
     @RequestMapping(value = EmpRestURIConstants.CREATE_BOOK, method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<?> createEmployee(@RequestBody BookDetailDto bookDetils) {
+	public @ResponseBody ResponseEntity<?> createBook(@RequestBody BookDetailDto bookDetils) {
     	bookDetils.setBdt_entry_date(new Date());
     	bookDetils.setBnum_isactive(1);
 		try {
@@ -63,6 +74,18 @@ public class BookDetailsController {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+    
+    @RequestMapping(value = EmpRestURIConstants.UPDATE_BOOK, method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<?> updateBook(@RequestBody BookDetailDto bookDetils) {
+    	bookDetils.setBdt_entry_date(new Date());
+    	bookDetils.setBnum_isactive(1);
+		try {
+			this.bookManagementService.updateBookDetailDto(bookDetils);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
     
     @RequestMapping(value = EmpRestURIConstants.DELETE_BOOK, method = RequestMethod.DELETE)
